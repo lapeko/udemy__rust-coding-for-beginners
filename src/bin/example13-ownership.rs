@@ -10,9 +10,9 @@ struct GroceryItem {
 }
 
 fn print_grocery_id(grocery: &GroceryItem) {
-    println!("{}", grocery.id);
+    println!("id: {}", grocery.id);
 }
 
 fn print_grocery_quantity(grocery: &GroceryItem) {
-    println!("{}", grocery.quantity);
+    println!("quantity: {}", grocery.quantity);
 }
