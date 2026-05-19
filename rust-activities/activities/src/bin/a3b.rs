@@ -9,4 +9,18 @@
 // * Use an if..else if..else block to determine which message to display
 // * Use the println macro to display messages to the terminal
 
-fn main() {}
+fn print_is_five(n: i32) {
+    if n > 5 {
+        println!(">5")
+    } else if n < 5 {
+        println!("<5")
+    } else {
+        println!("=5")
+    }
+}
+
+fn main() {
+    print_is_five(100);
+    print_is_five(-100);
+    print_is_five(5);
+}

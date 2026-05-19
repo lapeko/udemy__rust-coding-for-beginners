@@ -7,4 +7,14 @@
 // * Use a variable set to either true or false
 // * Use a match expression to determine which message to display
 
-fn main() {}
+fn print_bool(b: bool) {
+    match b {
+        true => println!("it's true"),
+        _ => println!("it's false"),
+    }
+}
+
+fn main() {
+    print_bool(true);
+    print_bool(false);
+}
