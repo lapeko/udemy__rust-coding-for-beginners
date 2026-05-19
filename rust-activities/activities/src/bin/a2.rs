@@ -8,4 +8,14 @@
 // * Use a function to display the result
 // * Use the "{:?}" token in the println macro to display the result
 
-fn main() {}
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+fn print_num(num: i32) {
+    println!("{:?}", num)
+}
+
+fn main() {
+    print_num(add(2, 3))
+}
