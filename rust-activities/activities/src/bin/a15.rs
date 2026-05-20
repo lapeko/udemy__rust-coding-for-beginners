@@ -11,51 +11,33 @@
 // * Create one of each ticket and place into a vector
 // * Use a match expression while iterating the vector to print the ticket info
 
-enum TicketCategory {
-    Backstage(String),
-    Vip(String),
-    Standard,
-}
-
-impl TicketCategory {
-    fn to_string(&self) -> String {
-        match self {
-            Self::Backstage(name) => format!("Backstage, Holder: {}", name),
-            Self::Vip(name) => format!("Vip, Holder: {}", name),
-            Self::Standard => "Standard".to_owned(),
-        }
-    }
-}
-
-struct Ticket {
-    category: TicketCategory,
-    price: f32,
+enum Ticket {
+    Backstage(f32, String),
+    Vip(f32, String),
+    Standard(f32),
 }
 
 impl Ticket {
-    fn new(category: TicketCategory, price: f32) -> Self {
-        Self { category, price }
-    }
-
-    fn to_string(&self) -> String {
-        format!(
-            "Ticket {{
-    category: {},
-    price: {},
-}}",
-            self.category.to_string(),
-            self.price
-        )
+    fn print(&self) {
+        match self {
+            Self::Backstage(price, holder) => {
+                println!("Category: Backstage. Price: {}. Holder: {}", price, holder)
+            }
+            Self::Vip(price, holder) => {
+                println!("Category: Vip. Price: {}. Holder: {}", price, holder)
+            }
+            Self::Standard(price) => println!("Category: Standard. Price: {}", price),
+        }
     }
 }
 
 fn main() {
     let tickets = vec![
-        Ticket::new(TicketCategory::Backstage("Alligator".to_owned()), 200.0),
-        Ticket::new(TicketCategory::Vip("Gigan Limon".to_owned()), 100.0),
-        Ticket::new(TicketCategory::Standard, 100.0),
+        Ticket::Backstage(200.0, "Alligator".to_owned()),
+        Ticket::Vip(100.0, "Gigan Limon".to_owned()),
+        Ticket::Standard(100.0),
     ];
     for t in tickets {
-        println!("{}", t.to_string())
+        t.print();
     }
 }
