@@ -12,4 +12,17 @@
 // * Use a match expression to determine which message
 //   to print
 
-fn main() {}
+fn print_message(n: i32) {
+    println!(
+        "{:?}",
+        match n {
+            n if n > 100 => "its big",
+            _ => "its small",
+        }
+    )
+}
+
+fn main() {
+    print_message(101);
+    print_message(100);
+}
