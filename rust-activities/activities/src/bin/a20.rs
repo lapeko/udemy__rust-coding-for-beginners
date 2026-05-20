@@ -23,4 +23,47 @@
 // * The program should be case-insensitive (the user should be able to type
 //   Reboot, reboot, REBOOT, etc.)
 
-fn main() {}
+use std::io;
+
+enum PowerOptions {
+    Off,
+    Sleep,
+    Reboot,
+    Shutdown,
+    Hibernate,
+}
+
+impl PowerOptions {
+    fn in_enum(s: &str) -> bool {
+        match s.to_lowercase().as_str() {
+            "off" | "sleep" | "reboot" | "shutdown" | "hibernate" => true,
+            _ => false,
+        }
+    }
+}
+
+fn read_power_option() -> io::Result<String> {
+    let mut buffer = String::new();
+    io::stdin().read_line(&mut buffer)?;
+    let trimmed = buffer.trim();
+    if !PowerOptions::in_enum(trimmed) {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!("{:?} is a wrong option", trimmed),
+        ));
+    }
+    Ok(trimmed.to_owned().to_uppercase())
+}
+
+fn main() {
+    let mut count = 0;
+    while count == 0 {
+        match read_power_option() {
+            Ok(s) => {
+                count = count + 1;
+                println!("{}", s);
+            }
+            Err(e) => println!("Error: {}", e),
+        }
+    }
+}

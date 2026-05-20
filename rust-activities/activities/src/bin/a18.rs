@@ -11,4 +11,30 @@
 // * Return a result from the function
 // * The Err variant should detail the reason why they cannot make a purchase
 
-fn main() {}
+struct Customer {
+    age: i32,
+}
+
+const LEGAL_AGE: i32 = 21;
+impl Customer {
+    fn new(age: i32) -> Self {
+        Self { age }
+    }
+
+    fn purchase(&self) -> Result<(), String> {
+        if self.age >= LEGAL_AGE {
+            return Ok(());
+        }
+        Err(format!("Purchase not allowed for age under {}", LEGAL_AGE))
+    }
+}
+
+fn main() {
+    let customers = vec![Customer::new(18), Customer::new(21)];
+    for c in customers {
+        match c.purchase() {
+            Err(reason) => println!("{}", reason),
+            Ok(()) => println!("Ok"),
+        };
+    }
+}

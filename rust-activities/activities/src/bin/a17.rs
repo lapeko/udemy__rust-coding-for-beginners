@@ -12,4 +12,9 @@
 //   to uppercase and lowercase
 //   * Try searching for: to_uppercase, to_lowercase
 
-fn main() {}
+fn main() {
+    let s = "MiXeD cAsE";
+    println!("{}", s.to_lowercase());
+    println!("{}", s.to_uppercase());
+    println!("{}", s);
+}
