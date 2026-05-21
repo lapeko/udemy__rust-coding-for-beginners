@@ -12,4 +12,49 @@
 // * Use a single function to print out the perimeter of the shapes
 //   * The function must utilize impl trait as a function parameter
 
-fn main() {}
+trait Perimeter {
+    fn perimeter(&self) -> i32;
+}
+
+struct Triangle {
+    a: i32,
+    b: i32,
+    c: i32,
+}
+
+impl Triangle {
+    fn new(a: i32, b: i32, c: i32) -> Self {
+        Self { a, b, c }
+    }
+}
+
+impl Perimeter for Triangle {
+    fn perimeter(&self) -> i32 {
+        self.a + self.b + self.c
+    }
+}
+
+struct Square {
+    a: i32,
+}
+
+impl Square {
+    fn new(a: i32) -> Self {
+        Self { a }
+    }
+}
+
+impl Perimeter for Square {
+    fn perimeter(&self) -> i32 {
+        self.a * 4
+    }
+}
+
+fn print_perimeter(shape: impl Perimeter) {
+    println!("{}", shape.perimeter());
+}
+
+fn main() {
+    print_perimeter(Square::new(10));
+    print_perimeter(Triangle::new(1, 2, 3));
+}

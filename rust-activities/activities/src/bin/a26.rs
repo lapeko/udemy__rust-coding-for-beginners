@@ -8,4 +8,8 @@
 // * (OPTIONAL) Read the documentation section `Formatting and Parsing`
 //   for examples on how to create custom time formats
 
-fn main() {}
+use chrono::Local;
+
+fn main() {
+    println!("Current date: {}", Local::now().format("%d.%m.%Y"));
+}

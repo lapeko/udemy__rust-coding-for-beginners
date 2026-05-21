@@ -11,7 +11,13 @@
 
 use thiserror::Error;
 
-enum ProgramError {}
+#[derive(Debug, Error)]
+enum ProgramError {
+    #[error("Menu error: {0}")]
+    Menu(#[from] MenuError),
+    #[error("Math error: {0}")]
+    Math(#[from] MathError),
+}
 
 #[derive(Debug, Error)]
 enum MenuError {
@@ -52,6 +58,12 @@ fn run(step: i32) -> Result<(), ProgramError> {
 }
 
 fn main() {
+    if let Err(e) = run(1) {
+        println!("{}", e);
+    }
+    if let Err(e) = run(2) {
+        println!("{}", e);
+    }
     println!("{:?}", run(1));
     println!("{:?}", run(2));
 }
